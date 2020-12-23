@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="en-us">
+  <head>
+    <meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="generator" content="Hugo 0.67.1" />
+
+
+<title>R_note_20201222 - A Hugo website</title>
+<meta property="og:title" content="R_note_20201222 - A Hugo website">
+
+
+  <link href='/favicon.ico' rel='icon' type='image/x-icon'/>
+
+
+
+  
+
+
+
+
+
+
+
+
+<link href='//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github.min.css' rel='stylesheet' type='text/css' />
+
+
+
+<link rel="stylesheet" href="/css/fonts.css" media="all">
+<link rel="stylesheet" href="/css/main.css" media="all">
+
+
+
+  </head>
+  <body>
+    <div class="wrapper">
+      <header class="header">
+        <nav class="nav">
+  <a href="/" class="nav-logo">
+    <img src="/images/logo.png"
+         width="50"
+         height="50"
+         alt="Logo">
+  </a>
+
+  <ul class="nav-links">
+    
+    <li><a href="/about/">About</a></li>
+    
+    <li><a href="https://github.com/rstudio/blogdown">GitHub</a></li>
+    
+    <li><a href="https://twitter.com/rstudio">Twitter</a></li>
+    
+  </ul>
+</nav>
+
+      </header>
+
+
+<main class="content" role="main">
+
+  <article class="article">
+    
+    <span class="article-duration">1 min read</span>
+    
+
+    <h1 class="article-title">R_note_20201222</h1>
+
+    
+    <span class="article-date">2020-12-23</span>
+    
+
+    <div class="article-content">
+      
+
+
+<div id="作图" class="section level1">
+<h1>作图</h1>
+<div id="简单图形" class="section level2">
+<h2>简单图形</h2>
+<div id="简单散点图" class="section level3">
+<h3>简单散点图</h3>
+<pre class="r"><code>write.csv(airquality,&quot;aq.csv&quot;)
+aq &lt;- read.csv(&quot;aq.csv&quot;)
+plot(aq$Temp)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-1-1.png" width="672" /></p>
+<p>pch改点的形状，col改点的颜色</p>
+<pre class="r"><code>plot(x=aq$Temp,y=aq$Ozone)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-2-1.png" width="672" /></p>
+<pre class="r"><code>plot(x=aq$Temp,y=aq$Ozone,pch=18,col=&quot;blue&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-2-2.png" width="672" /></p>
+<pre class="r"><code># install.packages(&quot;beginr&quot;)
+library(beginr)
+plotpch()  #查看不同数字对应的形状</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-3-1.png" width="672" /></p>
+<pre class="r"><code>plotcolors() #查看色带</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-3-2.png" width="672" /></p>
+<pre class="r"><code>plotcolorbar() #彩虹色带</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-3-3.png" width="672" /></p>
+<pre class="r"><code>rainbow(100)[35]</code></pre>
+<pre><code>## [1] &quot;#00FF0A&quot;</code></pre>
+<pre class="r"><code>plot(x = aq$Temp, y = aq$Ozone, pch = 18, col = rainbow(100)[35])</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-4-1.png" width="672" /></p>
+<p>if语句使用</p>
+<pre class="r"><code>x &lt;- -1
+if(x&gt;0){
+  print(&quot;positive&quot;)
+}else{
+    print(&quot;zero or negative&quot;)
+  }</code></pre>
+<pre><code>## [1] &quot;zero or negative&quot;</code></pre>
+<pre class="r"><code>x1 &lt;- 3
+x1 &lt;- ifelse(x1&gt;0,&quot;positive&quot;,&quot;zero or negative&quot;)
+x1</code></pre>
+<pre><code>## [1] &quot;positive&quot;</code></pre>
+<p>调整不同参数</p>
+<pre class="r"><code>plot(x = aq$Temp, y = aq$Ozone, 
+     pch = ifelse(aq$Temp &lt; 70, &quot;小&quot;, &quot;大&quot;), 
+     col = ifelse(aq$Ozone &gt; 100, &quot;red&quot;, &quot;blue&quot;),
+     cex = ifelse(aq$Solar.R &gt; 200, 2, 1))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-6-1.png" width="672" /></p>
+<pre class="r"><code>par(las = 1)
+plot(x = aq$Temp, y = aq$Ozone, type = &quot;h&quot;, 
+     xlab = &quot;Temperature&quot;, ylab = &quot;Ozone&quot;)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<pre class="r"><code>#plotcolorbar()
+#plottype()
+#plotlty()</code></pre>
+<pre class="r"><code>plot(x=aq$Temp,y=aq$Ozone,
+     xlim = c(50,100),ylim = c(30,50),
+     xlab = &quot;Temperature&quot;,ylab = &quot;Ozone&quot;,
+     pch = 16,
+     col = terrain.colors(100)[floor(aq$Solar.R-min(aq$Solar.R,na.rm = TRUE))])</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-9-1.png" width="672" /></p>
+<pre class="r"><code>plot(x=aq$Temp,y=aq$Ozone,pch=18,col=ifelse(aq$Ozone&gt;100,&quot;red&quot;,&quot;green&quot;))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<pre class="r"><code>plot(x=aq$Temp,y=aq$Ozone,
+     pch=ifelse(aq$Temp&lt;70,8,3),
+     col=ifelse(aq$Ozone&gt;100,&quot;red&quot;,&quot;green&quot;),
+     cex=3)</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-10-2.png" width="672" /></p>
+<pre class="r"><code>plot(x=aq$Temp,y=aq$Ozone,
+     pch=ifelse(aq$Temp&lt;70,8,3),
+     col=ifelse(aq$Ozone&gt;100,&quot;red&quot;,&quot;green&quot;),
+     cex=ifelse(aq$Solar.R&gt;200,2,1))</code></pre>
+<p><img src="index_files/figure-html/unnamed-chunk-10-3.png" width="672" /></p>
+</div>
+</div>
+</div>
+
+    </div>
+  </article>
+
+  
+
+
+</main>
+
+      <footer class="footer">
+        <ul class="footer-links">
+          <li>
+            <a href="/index.xml" type="application/rss+xml" target="_blank">RSS feed</a>
+          </li>
+          <li>
+            <a href="https://gohugo.io/" class="footer-links-kudos">Made with <img src="/images/hugo-logo.png" alt="Img link to Hugo website" width="22" height="22"></a>
+          </li>
+        </ul>
+      </footer>
+
+    </div>
+    
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/highlight.min.js"></script>
+
+
+
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/r.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/languages/yaml.min.js"></script>
+<script>hljs.configure({languages: []}); hljs.initHighlightingOnLoad();</script>
+
+
+
+    
+<script src="/js/math-code.js"></script>
+<script async src="//cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/MathJax.js?config=TeX-MML-AM_CHTML"></script>
+
+
+    
+  </body>
+</html>
+

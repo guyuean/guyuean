@@ -12,6 +12,18 @@
     
     
     <item>
+      <title>R11</title>
+      <link>/2020/12/23/r11/</link>
+      <pubDate>Wed, 23 Dec 2020 00:00:00 +0000</pubDate>
+      
+      <guid>/2020/12/23/r11/</guid>
+      <description>作图简单图形简单散点图write.csv(airquality,&amp;quot;aq.csv&amp;quot;)aq &amp;lt;- read.csv(&amp;quot;aq.csv&amp;quot;)plot(aq$Temp)pch改点的形状，col改点的颜色
+plot(x=aq$Temp,y=aq$Ozone)plot(x=aq$Temp,y=aq$Ozone,pch=18,col=&amp;quot;blue&amp;quot;)# install.packages(&amp;quot;beginr&amp;quot;)library(beginr)plotpch() #查看不同数字对应的形状plotcolors() #查看色带plotcolorbar() #彩虹色带rainbow(100)[35]## [1] &amp;quot;#00FF0A&amp;quot;plot(x = aq$Temp, y = aq$Ozone, pch = 18, col = rainbow(100)[35])if语句使用
+x &amp;lt;- -1if(x&amp;gt;0){print(&amp;quot;positive&amp;quot;)}else{print(&amp;quot;zero or negative&amp;quot;)}## [1] &amp;quot;zero or negative&amp;quot;x1 &amp;lt;- 3x1 &amp;lt;- ifelse(x1&amp;gt;0,&amp;quot;positive&amp;quot;,&amp;quot;zero or negative&amp;quot;)x1## [1] &amp;quot;positive&amp;quot;调整不同参数
+plot(x = aq$Temp, y = aq$Ozone, pch = ifelse(aq$Temp &amp;lt; 70, &amp;quot;小&amp;quot;, &amp;quot;大&amp;quot;), col = ifelse(aq$Ozone &amp;gt; 100, &amp;quot;red&amp;quot;, &amp;quot;blue&amp;quot;),cex = ifelse(aq$Solar.</description>
+    </item>
+    
+    <item>
       <title>R_note_20201222</title>
       <link>/2020/12/23/r-note-20201222/</link>
       <pubDate>Wed, 23 Dec 2020 00:00:00 +0000</pubDate>
